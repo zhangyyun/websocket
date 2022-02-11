@@ -224,7 +224,7 @@ func (d *Dialer) DialContext(ctx context.Context, urlStr string, requestHeader h
 			k == "Connection" ||
 			k == "Sec-Websocket-Key" ||
 			k == "Sec-Websocket-Version" ||
-			k == "Sec-Websocket-Extensions" ||
+			(k == "Sec-Websocket-Extensions" && d.EnableCompression) ||
 			(k == "Sec-Websocket-Protocol" && len(d.Subprotocols) > 0):
 			return nil, nil, errors.New("websocket: duplicate header not allowed: " + k)
 		case k == "Sec-Websocket-Protocol":
